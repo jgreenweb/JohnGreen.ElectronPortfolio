@@ -1,0 +1,16 @@
+a:link {
+  color: black
+}
+.twitter-container {
+  display: flex; justify-content: space-evenly
+}
+footer {
+  display: flex;
+  justify-content: center;
+  margin-top: .6rem;
+  margin-bottom: 1rem;
+}
+a {
+  margin: 0 1rem
+}
+
