@@ -42,7 +42,9 @@ export default {
 <style scoped>
   .QrContainer {
     display: block;
-    margin: 0 .5rem .5rem
+    margin: 0 .5rem .5rem;
+    border-color: rgb(160, 223, 160);
+    border-width: 2px;
   }
   h4 {
     font-size: 1.2rem;

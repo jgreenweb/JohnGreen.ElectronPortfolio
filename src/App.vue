@@ -1,4 +1,8 @@
 <template>
+  <button
+    v-on:click="screenshot"
+    class="screenshot fas fa-camera fa-2x btn btn-secondary"
+  />
   <div id="QrContainerContainer">
     <QrContainer name="John Green" />
     <QrContainer
@@ -10,14 +14,19 @@
     />
   </div>
   <div id="button-container">
-    <button class="btn btn-primary" v-on:click="getPrices()">Manual Price Fetch</button>
-    <button class="btn btn-secondary" v-on:click="toggleFetching()">Auto Fetch: {{!pauseFetching}}</button>
+    <!-- <button class="btn btn-primary" v-on:click="getPrices()">Manual Price Fetch</button> -->
+    <button class="btn btn-success" v-on:click="toggleFetching()">
+      Auto Fetch: {{ !pauseFetching }}
+    </button>
   </div>
 </template>
 
 <script>
 import QrContainer from "./components/QrContainer";
 import axios from "axios";
+const fs = require("fs");
+const win = require("@electron/remote").getCurrentWindow();
+const { dialog } = require("@electron/remote");
 
 export default {
   name: "App",
@@ -28,7 +37,7 @@ export default {
     return {
       prices: [],
       message: "hello",
-      pauseFetching: false
+      pauseFetching: false,
     };
   },
   methods: {
@@ -39,25 +48,43 @@ export default {
     getPrices() {
       axios
         .get(
-          "https://api.nomics.com/v1/currencies/ticker?key=b93ea7cd18ab1ab1d9af9129ad36a345&ids=XTZ,BURST,ADA"
+          `https://api.nomics.com/v1/currencies/ticker?key=${process.env.VUE_APP_APIKEY}&ids=XTZ,BURST,ADA`
         ) //need to set this in process env instead of hardcode
         .then((response) => {
           console.log(response);
           this.prices = response.data;
-          console.log(this.prices)
+          console.log(this.prices);
         });
     },
-    toggleFetching () {
-      this.pauseFetching = !this.pauseFetching
-    }
+    toggleFetching() {
+      this.pauseFetching = !this.pauseFetching;
+    },
+    screenshot() {
+      //console.log(win);
+      win.capturePage().then((nativeImage) => {
+        const png = nativeImage.toPNG();
+        dialog
+          .showSaveDialog({
+            defaultPath: Date.now() + ".png",
+            properties: ["openDirectory"],
+          })
+          .then((result) => {
+            if (!result.canceled) {
+              fs.writeFile(result.filePath, png, (err) => {
+                console.log(err);
+              });
+            }
+          });
+      });
+    },
   },
   mounted() {
     this.getPrices();
     window.setInterval(() => {
-      if(!this.pauseFetching) {
-        this.getPrices()
+      if (!this.pauseFetching) {
+        this.getPrices();
       }
-    }, 10000)
+    }, 10000);
   },
 };
 </script>
@@ -84,8 +111,13 @@ export default {
   flex-direction: column;
 }
 button {
-  margin: .5rem auto;
-  background-color: goldenrod;
+  margin: 0.5rem auto;
+  color: rgb(160, 223, 160);
   max-width: 15rem;
+}
+.screenshot {
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
 }
 </style>

@@ -2,13 +2,14 @@ a:link {
   color: black
 }
 .twitter-container {
-  display: flex; justify-content: space-evenly
+  display: flex; justify-content: space-evenly;
+  background-color: rgb(160, 223, 160);
+  padding: .7rem;
 }
 footer {
   display: flex;
   justify-content: center;
-  margin-top: .6rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 a {
   margin: 0 1rem
