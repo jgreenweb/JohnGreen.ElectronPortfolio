@@ -8,6 +8,13 @@ Node v12.13.1
 npm install
 ```
 
+You'll need an api key from nomics. Make a file named `.env` in the root of the project with this single line: 
+
+```
+VUE_APP_APIKEY=yourkey
+```
+replacing `yourkey` with your api key
+
 ### Compiles and hot-reloads for development
 ```
 npm run electron:serve
