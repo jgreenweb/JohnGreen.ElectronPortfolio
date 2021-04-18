@@ -15,7 +15,7 @@
   </div>
   <div id="button-container">
     <!-- <button class="btn btn-primary" v-on:click="getPrices()">Manual Price Fetch</button> -->
-    <button class="btn btn-success" v-on:click="toggleFetching()">
+    <button id="fetchBtn" class="btn btn-success" v-on:click="toggleFetching()">
       Auto Fetch: {{ !pauseFetching }}
     </button>
   </div>
@@ -110,14 +110,18 @@ export default {
   display: flex;
   flex-direction: column;
 }
-button {
+#fetchBtn {
   margin: 0.5rem auto;
-  color: rgb(160, 223, 160);
+  background-color: rgb(160, 223, 160);
+  border: none;
   max-width: 15rem;
+  margin-bottom: .7rem;
 }
 .screenshot {
   position: absolute;
   left: 1rem;
   top: 0.5rem;
+  background-color: rgb(160, 223, 160);
+  border: none;
 }
 </style>

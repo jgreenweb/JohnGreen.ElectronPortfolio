@@ -1,6 +1,6 @@
 <template>
   <div class="card QrContainer">
-    <img class= "card-img-top" :src="logo ? logo : myFace"/>
+    <img class= "card-img-top" :src="logo ? logo : myFace" :alt="name" :title="name"/>
     <h4 class="card-body">{{ price ? price : name }}</h4> 
     <canvas v-on:click="getProps" class="card-img-bottom" v-bind:id="name" width="100" height="100"/>
   </div>
