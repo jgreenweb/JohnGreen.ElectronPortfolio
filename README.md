@@ -7,6 +7,7 @@ Node v12.13.1
 ```
 npm install
 ```
+If you don't have Node installed already, grab it from https://nodejs.org/en/download/
 
 You'll need an api key from nomics. Make a file named `.env` in the root of the project with this single line: 
 
