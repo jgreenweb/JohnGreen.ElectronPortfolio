@@ -1,25 +1,22 @@
 a:link {
-  color: rgb(160, 223, 160)
+  color: rgb(160, 223, 160);
 }
 .twitter-container {
-  display: flex; justify-content: space-evenly;
-  /* background-color: rgb(160, 223, 160); */
-  /* padding-top: .5rem;
-  padding-bottom: .5rem; */
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .feed-container {
   border: solid rgb(160, 223, 160);
   border-width: 2px;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 footer {
   display: flex;
   justify-content: center;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 a {
-  margin: 0 1rem
+  margin: 0 1rem;
 }
-

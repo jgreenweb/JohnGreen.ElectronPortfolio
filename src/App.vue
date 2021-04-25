@@ -51,9 +51,9 @@ export default {
           `https://api.nomics.com/v1/currencies/ticker?key=${process.env.VUE_APP_APIKEY}&ids=XTZ,BURST,ADA`
         ) //need to set this in process env instead of hardcode
         .then((response) => {
-          console.log(response);
-          this.prices = response.data;
-          console.log(this.prices);
+          console.log(response.data);
+          this.prices = response.data; //saves coin object data to app state
+          //console.log(this.prices);
         });
     },
     toggleFetching() {
@@ -61,7 +61,7 @@ export default {
     },
     screenshot() {
       //console.log(win);
-      win.capturePage().then((nativeImage) => {
+      win.capturePage({x: 0, y: 0, width: 899, height: 899}).then((nativeImage) => { //possible linux fix
         const png = nativeImage.toPNG();
         dialog
           .showSaveDialog({
@@ -78,7 +78,7 @@ export default {
       });
     },
   },
-  mounted() {
+  mounted() { // fetches prices upon load and every 10 seconds after, if pauseFetching is not true
     this.getPrices();
     window.setInterval(() => {
       if (!this.pauseFetching) {
@@ -115,7 +115,7 @@ export default {
   background-color: rgb(160, 223, 160);
   border: none;
   max-width: 15rem;
-  margin-bottom: .7rem;
+  margin-bottom: 0.7rem;
 }
 .screenshot {
   position: absolute;
